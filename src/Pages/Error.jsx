@@ -13,8 +13,6 @@ const Error = () => {
             <h1>Error 404</h1>
             <p>Sorry, The page you requested could not be found.</p>
 
-
-            {/* Link kaha karogeeeee?????????? */}
             <Link to="/" className="go-back">                      
                 <FontAwesomeIcon
                     icon={faArrowLeft}

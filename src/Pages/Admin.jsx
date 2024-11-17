@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import AdminProfileModal from "./AdminProfileModal";
+import AddProfileModal from "./AddProfileModal";
+import EditProfileModal from "./EditProfileModal";
 
 const Admin = () => {
-    const [showModal, setShowModal] = useState(false);
+    const [showAddModal, setShowAddModal] = useState(false);
+    const [showEditModal, setShowEditModal] = useState(false);
     const [profiles, setProfiles] = useState(
         JSON.parse(localStorage.getItem("profiles")) || []
     );
@@ -20,29 +22,30 @@ const Admin = () => {
         setProfiles(updatedProfiles);
     };
 
-    const editProfile = (updatedProfile) => {
-        const updatedProfiles = profiles.map((profile) =>
-            profile.id === updatedProfile.id ? updatedProfile : profile
-        );
-        localStorage.setItem("profiles", JSON.stringify(updatedProfiles));
-        setProfiles(updatedProfiles);
-    };
-
     const handleEditClick = (profile) => {
         setProfileToEdit(profile);
-        setShowModal(true);
+        setShowEditModal(true);
     };
 
     return (
         <div className="admin-panel hero">
             <h2>Admin Panel</h2>
             <button
-                onClick={() => setShowModal(true)}
+                onClick={() => setShowAddModal(true)}
                 className="search-bar add-btn"
-                style={{ fontSize: "large", fontFamily: "sans-serif", color:"white", padding:"10px 13px", backgroundColor:"#007bff"}}
+                style={{
+                    fontSize: "large",
+                    fontFamily: "sans-serif",
+                    color: "white",
+                    padding: "10px 20px",
+                    backgroundColor: "#007bff",
+                    height: "fit-content",
+                    width: "fit-content",
+                }}
             >
                 Add Profile
             </button>
+
             <div className="profile-cards">
                 {profiles.map((profile) => (
                     <div key={profile.id} className="profile-card">
@@ -61,9 +64,7 @@ const Admin = () => {
                                 >
                                     Delete
                                 </button>
-                                <button
-                                    onClick={() => handleEditClick(profile)}
-                                >
+                                <button onClick={() => handleEditClick(profile)}>
                                     Edit
                                 </button>
                             </div>
@@ -71,12 +72,25 @@ const Admin = () => {
                     </div>
                 ))}
             </div>
-            {showModal && (
-                <AdminProfileModal
-                    profile={profileToEdit} // Pass profile data for editing
+
+            {showAddModal && (
+                <AddProfileModal
                     addProfile={addProfile}
-                    editProfile={editProfile} // Handle edit logic
-                    closeModal={() => setShowModal(false)}
+                    closeModal={() => setShowAddModal(false)}
+                />
+            )}
+
+            {showEditModal && (
+                <EditProfileModal
+                    profile={profileToEdit}
+                    editProfile={(updatedProfile) => {
+                        const updatedProfiles = profiles.map((profile) =>
+                            profile.id === updatedProfile.id ? updatedProfile : profile
+                        );
+                        localStorage.setItem("profiles", JSON.stringify(updatedProfiles));
+                        setProfiles(updatedProfiles);
+                    }}
+                    closeModal={() => setShowEditModal(false)}
                 />
             )}
         </div>

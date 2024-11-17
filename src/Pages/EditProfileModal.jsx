@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const AdminProfileModal = ({ profile, addProfile, editProfile, closeModal }) => {
+const EditProfileModal = ({ profile, editProfile, closeModal }) => {
     const [profileData, setProfileData] = useState({
         id: "",
         name: "",
@@ -11,19 +11,11 @@ const AdminProfileModal = ({ profile, addProfile, editProfile, closeModal }) => 
         interests: [],
     });
 
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
     useEffect(() => {
         if (profile) {
-            setProfileData(profile); 
-        } else {
-            setProfileData({
-                id: "",
-                name: "",
-                age: "",
-                image: "",
-                location: "",
-                contact: "",
-                interests: [],
-            });
+            setProfileData(profile);
         }
     }, [profile]);
 
@@ -34,27 +26,43 @@ const AdminProfileModal = ({ profile, addProfile, editProfile, closeModal }) => 
         });
     };
 
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = () => {
+                setProfileData((prevData) => ({
+                    ...prevData,
+                    image: reader.result, // Base64 string
+                }));
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (profileData.id) {
-            editProfile(profileData); 
-        } else {
-            addProfile(profileData);
-        }
-        closeModal();
+        setIsSubmitting(true);
+        setTimeout(() => {
+            editProfile(profileData);
+            closeModal();
+            setIsSubmitting(false);
+        }, 1000); // Simulating API delay
     };
 
     return (
         <div className="modal-overlay">
             <div className="modal">
-                <h2>{profileData.id ? "Edit Profile" : "Add Profile"}</h2>
-                <form onSubmit={handleSubmit}>
+                <h2>Edit Profile</h2>
+                {isSubmitting && <div className="loader"></div>}
+                <form onSubmit={handleSubmit} style={{ position: "relative", opacity: isSubmitting ? 0.6 : 1 }}>
                     <input
                         type="text"
                         name="name"
                         placeholder="Name"
                         value={profileData.name}
                         onChange={handleChange}
+                        required
                     />
                     <input
                         type="number"
@@ -62,6 +70,7 @@ const AdminProfileModal = ({ profile, addProfile, editProfile, closeModal }) => 
                         placeholder="Age"
                         value={profileData.age}
                         onChange={handleChange}
+                        required
                     />
                     <input
                         type="text"
@@ -69,13 +78,13 @@ const AdminProfileModal = ({ profile, addProfile, editProfile, closeModal }) => 
                         placeholder="Location"
                         value={profileData.location}
                         onChange={handleChange}
+                        required
                     />
                     <input
                         type="file"
                         name="image"
-                        placeholder="Image URL"
-                        value={profileData.image}
-                        onChange={handleChange}
+                        accept="image/*"
+                        onChange={handleFileChange}
                     />
                     <input
                         type="text"
@@ -97,11 +106,22 @@ const AdminProfileModal = ({ profile, addProfile, editProfile, closeModal }) => 
                         }
                     />
                     <div className="modal-buttons">
-                        <button type="submit" style={{marginRight:"30px"}}>Save</button>
+                        <button
+                            type="submit"
+                            disabled={isSubmitting}
+                            style={{
+                                marginRight: "30px",
+                                backgroundColor: isSubmitting ? "#aaa" : "#007bff",
+                                cursor: isSubmitting ? "not-allowed" : "pointer",
+                            }}
+                        >
+                            {isSubmitting ? "Saving..." : "Save"}
+                        </button>
                         <button
                             type="button"
                             className="close-button"
                             onClick={closeModal}
+                            disabled={isSubmitting}
                         >
                             Close
                         </button>
@@ -112,4 +132,4 @@ const AdminProfileModal = ({ profile, addProfile, editProfile, closeModal }) => 
     );
 };
 
-export default AdminProfileModal;
+export default EditProfileModal;

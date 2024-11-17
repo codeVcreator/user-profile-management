@@ -9,7 +9,6 @@ import Contact from "./Pages/Contact";
 import Admin from "./Pages/Admin";
 import Customer from "./Pages/Customer";
 import Error from "./Pages/Error";
-import MapPage from "./Pages/MapPage";
 import person_1 from "./Components/person_1.png"
 import person_2 from "./Components/person_2.png"
 import person_3 from "./Components/person_3.png"
@@ -28,8 +27,8 @@ const App = () => {
                 age: 22,
                 image: person_5,
                 location: "Jaipur, India",
-                latitude: 40.7128,
-                longitude: -74.0060,
+                latitude: 26.9124,
+                longitude: -75.7873,
                 contact: "sahil@gmail.com",
                 interests: ["Music", "Traveling", "Coding"],
             },
@@ -49,9 +48,9 @@ const App = () => {
                 name: "Sunny Singh",
                 age: 41,
                 image: person_2,
-                location: "Dubai",
-                latitude: 51.5074,
-                longitude: -0.1278,
+                location: "Dubai, UAE",
+                latitude: 25.2048,
+                longitude: -55.2708,
                 contact: "david@gmail.com",
                 interests: ["Singing", "Gardening"],
             },
@@ -61,8 +60,8 @@ const App = () => {
                 age: 24,
                 image: person_3,
                 location: "Kerala, India",
-                latitude: 51.5074,
-                longitude: -0.1278,
+                latitude: 10.1632,
+                longitude: -76.6413,
                 contact: "jenny@gmail.com",
                 interests: ["Cooking", "Driving"],
             },
@@ -72,7 +71,7 @@ const App = () => {
                 age: 29,
                 image: person_4,
                 location: "Mumbai, India",
-                latitude: 19.076,
+                latitude: 19.0760,
                 longitude: 72.8777,
                 contact: "aarav.mehta@gmail.com",
                 interests: ["Cricket", "Bollywood Movies", "Traveling"],
@@ -104,7 +103,6 @@ const App = () => {
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/admin" element={<Admin />} />
                 <Route path="/customer" element={<Customer />} />
-                <Route path="/maps/:id" element={<MapPage />} />
                 <Route path="*" element={<Error />} />
             </Routes>
             <Footer />

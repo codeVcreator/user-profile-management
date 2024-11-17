@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import ProfileModal from "./ProfileModal";
+import GoogleMapModal from "../Components/GoogleMapModal";
 
 const Customer = () => {
     const profiles = JSON.parse(localStorage.getItem("profiles")) || [];
     const [searchItem, setSearchItem] = useState("");
     const [selectedProfile, setSelectedProfile] = useState(null);
+    const [mapProfile, setMapProfile] = useState(null); // For map modal
 
+    // Filtering profiles based on search input
     const filteredProfiles = profiles.filter(
         (profile) =>
             profile.name.toLowerCase().includes(searchItem.toLowerCase()) ||
@@ -24,11 +26,19 @@ const Customer = () => {
         setSelectedProfile(null);
     };
 
+    const openMapModal = (profile) => {
+        setMapProfile(profile);
+    };
+
+    const closeMapModal = () => {
+        setMapProfile(null);
+    };
+
     return (
         <div className="customer-panel hero">
             <h2>Profile Dashboard</h2>
 
-            {/* Search Bar */}
+            {/* Search bar */}
             <input
                 type="text"
                 placeholder="Search by name, location, or interests..."
@@ -37,44 +47,69 @@ const Customer = () => {
                 className="search-bar"
             />
 
-            {/* Profile Cards */}
-            <div className="profile-cards">
-                {filteredProfiles.length > 0 ? (
-                    filteredProfiles.map((profile) => (
+            {/* Displaying profile cards */}
+            {filteredProfiles.length > 0 ? (
+                <div className="profile-cards">
+                    {filteredProfiles.map((profile) => (
                         <div
                             className="profile-card"
                             key={profile.id}
-                            onClick={() => openModal(profile)} // Open modal on click
+                            onClick={() => openModal(profile)}
                         >
                             <img src={profile.image} alt={profile.name} />
                             <div className="profile-info">
                                 <h3>{profile.name}</h3>
                                 <p>Age: {profile.age}</p>
                                 <p>Location: {profile.location}</p>
-                                <button>
-                                    <Link
-                                        to={`/maps/${profile.latitude}/${profile.longitude}`}
-                                        style={{
-                                            textDecoration: "none",
-                                            color: "white",
-                                        }}
-                                    >
-                                        View on Map
-                                    </Link>
+                                <button
+                                    onClick={(e) => {
+                                        e.stopPropagation(); // Prevent triggering the profile modal
+                                        openMapModal(profile);
+                                    }}
+                                >
+                                    View on Map
                                 </button>
                             </div>
                         </div>
-                    ))
-                ) : (
-                    <p>No profiles found. Please add some profiles.</p>
-                )}
-            </div>
+                    ))}
+                </div>
+            ) : (
+                <div
+                    style={{
+                        display: "flex",
+                        justifyContent: "start",
+                        alignItems: "center",
+                        height: "50vh", // Ensures vertical centering
+                        flexDirection: "column",
+                    }}
+                >
+                    <p
+                        style={{
+                            fontSize: "large",
+                            color: "black",
+                            textAlign: "center",
+                        }}
+                    >
+                        No profiles found.
+                    </p>
+                </div>
+            )}
 
-            {/* Show Modal if Profile is Selected */}
+            {/* Profile Modal */}
             {selectedProfile && (
                 <ProfileModal
                     profile={selectedProfile}
                     closeModal={closeModal}
+                />
+            )}
+
+            {/* Google Map Modal */}
+            {mapProfile && (
+                <GoogleMapModal
+                    latitude={parseFloat(mapProfile.latitude)}
+                    longitude={parseFloat(mapProfile.longitude)}
+                    name={mapProfile.name}
+                    closeModal={closeMapModal}
                 />
             )}
         </div>
