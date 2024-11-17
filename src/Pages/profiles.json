@@ -1,0 +1,24 @@
+// [
+//     {
+//         "id": 1,
+//         "name": "John Doe",
+//         "age": 28,
+//         "image": "./images/john_doe.jpg",
+//         "location": "New York, USA",
+//         "latitude": 40.7128,
+//         "longitude": -74.0060,
+//         "contact": "john.doe@example.com",
+//         "interests": ["Music", "Traveling", "Coding"]
+//     },
+//     {
+//         "id": 2,
+//         "name": "Jane Smith",
+//         "age": 32,
+//         "image": "./images/jane_smith.jpg",
+//         "location": "London, UK",
+//         "latitude": 51.5074,
+//         "longitude": -0.1278,
+//         "contact": "jane.smith@example.com",
+//         "interests": ["Art", "Photography", "Gardening"]
+//     }
+// ]

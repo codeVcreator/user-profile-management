@@ -1,38 +1,765 @@
-.App {
-  text-align: center;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.my-app {
+    min-height: 100vh;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* 
+--------------------------------------------------------------------------------
+                                NAVBAR
+--------------------------------------------------------------------------------
+*/
+.navbar {
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 50px;
+    width: 100%;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    background-color: #f3f3f3e9;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.logo {
+    height: 40px;
+    cursor: pointer;
 }
 
-.App-link {
-  color: #61dafb;
+.links {
+    display: flex;
+    gap: 25px;
+    align-items: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 25px;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: #000;
+    font-size: 1.1rem;
+    padding-bottom: 5px;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.3s, color 0.3s;
+}
+
+.nav-links li a:hover {
+    color: #1c3db9;
+    border-color: #1c3db9;
+}
+
+.nav-links li a.active {
+    color: #1c3db9;
+    border-color: #1c3db9;
+}
+
+.know-more {
+    background-color: #2b59ff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.know-more:hover {
+    background-color: #1c3db9;
+}
+
+/* 
+--------------------------------------------------------------------------------
+                                FOOTER
+--------------------------------------------------------------------------------
+*/
+#footer {
+    height: 100px;
+    background-color: #ffffff8c;
+    color: #000;
+    font-size: medium;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#footer span {
+    color: #1c3db9;
+    font-weight: bold;
+    font-size: medium;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+        sans-serif;
+}
+
+/* 
+--------------------------------------------------------------------------------
+                                HERO    
+--------------------------------------------------------------------------------
+*/
+.hero {
+    margin-top: 70px;
+    min-height: calc(100vh - 70px);
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right, #74f9ff, #5a8bff);
+}
+
+/* 
+--------------------------------------------------------------------------------
+                                CONTACT US    
+--------------------------------------------------------------------------------
+*/
+.contact {
+    background: linear-gradient(rgba(255, 255, 255, 0.7), rgba(0, 0, 0, 0.7)),
+        url("./Components/contact-us.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 0;
+}
+
+.contact-modal {
+    height: 80%;
+    width: 70%;
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 2pc;
+    padding: 40px 50px;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+}
+
+.contact-modal p {
+    margin-bottom: 8px;
+    color: rgb(65, 65, 65);
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* 
+--------------------------------------------------------------------------------
+                                ABOUT US    
+--------------------------------------------------------------------------------
+*/
+.about {
+    background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0.5)),
+        url("./Components/about-us.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 0;
+}
+
+.about-modal {
+    height: 80%;
+    width: 70%;
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 2pc;
+    padding: 40px 50px;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+}
+
+.about-modal h2 {
+    margin-bottom: 8px;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.about-modal p {
+    color: rgb(65, 65, 65);
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.about-modal .modal-heading {
+    margin-top: 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.about-modal .icon {
+    font-size: 1.2rem;
+    color: darkblue;
+}
+
+/* 
+--------------------------------------------------------------------------------
+                                HOMEPAGE    
+--------------------------------------------------------------------------------
+*/
+.hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.homepage {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    padding: 40px;
+}
+
+.homepage-content h1,
+span {
+    font-family: monospace;
+    font-size: 30px;
+}
+
+.homepage-content span {
+    color: #1c3db9;
+}
+
+.home-card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 90px;
+    width: 100%;
+    max-width: 1000px;
+}
+
+.home-link {
+    text-decoration: none;
+    color: inherit;
+    width: 40%;
+    max-width: 400px;
+    display: flex;
+    justify-content: center;
+}
+
+.home-card {
+    height: 45vh;
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: lightcyan;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.home-card:hover {
+    transform: translateY(-5px);
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 8px 20px;
+    border: 2px solid white;
+}
+
+.home-card p {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 25px;
+    margin-bottom: 5px;
+    color: white;
+}
+
+.home-icons {
+    font-size: 1.5rem;
+    color: #353434;
+    margin-top: 5px;
+    display: none;
+}
+
+.home-card:hover .home-icons {
+    display: block;
+}
+
+.admin {
+    background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0.5)),
+        url("./Components/administrator.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+.customer {
+    background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0.5)),
+        url("./Components/customer.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+    .home-card-container {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .home-link {
+        width: 80%; /* Make cards wider on smaller screens */
+    }
+
+    .home-card {
+        height: 40vh;
+    }
+}
+
+/* 
+--------------------------------------------------------------------------------
+                                ERROR    
+--------------------------------------------------------------------------------
+*/
+.error {
+    flex-direction: column;
+}
+.error .icon {
+    font-size: 5rem;
+}
+.error .left-icon {
+    font-size: 1rem;
+    margin-right: 6px;
+}
+.error h1 {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-family: Georgia, "Times New Roman", Times, serif;
+}
+.error p {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+        sans-serif;
+    font-size: large;
+    color: aliceblue;
+    margin-bottom: 10px;
+}
+.error .go-back {
+    padding: 8px 15px;
+    font-family: "Courier New", Courier, monospace;
+    border-radius: 1pc;
+    background-color: whitesmoke;
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.go-back span {
+    font-size: large;
+}
+.go-back:hover {
+    border: 1px solid black;
+    background-color: rgba(245, 245, 245, 0.8);
+}
+
+/* 
+--------------------------------------------------------------------------------
+                                CUSTOMER    
+--------------------------------------------------------------------------------
+*/
+.customer-panel {
+    display: flex;
+    flex-direction: column;
+    color: whitesmoke;
+    padding: 50px;
+}
+
+.customer-panel h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 2rem;
+}
+
+.search-bar{
+    height: 40px;
+    padding: 12px 12px;
+    background-color: #e9e6e6;
+    width: 60%;
+    border: 0;
+    border-radius: 1pc;
+    margin-bottom: 50px;
+}
+
+.profile-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 75px;
+    padding: 0 1rem;
+}
+
+@media (max-width: 768px) {
+    .profile-cards {
+        grid-template-columns: 1fr; 
+    }
+
+    .search-bar {
+        width: 80%;
+    }
+}
+
+.profile-card {
+    background: #ffffff;
+    width: 300px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-align: center;
+    padding: 15px;
+}
+
+.profile-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.profile-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+
+}
+
+.profile-info {
+    padding: 1rem;
+}
+
+.profile-info h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.profile-info p {
+    font-size: 1rem;
+    color: #666;
+    margin: 0.5rem 0;
+}
+
+.profile-info button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.profile-info button:hover {
+    background-color: #0056b3;
+}
+
+.profile-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.profile-link:hover {
+    text-decoration: none;
+}
+
+/* 
+--------------------------------------------------------------------------------
+                                MODAL    
+--------------------------------------------------------------------------------
+*/
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;  
+    max-height: 80vh;  
+}
+
+.modal img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+.modal h3 {
+    font-size: 1.8rem;
+    margin-top: 15px;
+}
+
+.modal p {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 10px;
+    text-align: left;  
+}
+
+.modal button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;  
+}
+
+.modal button:hover {
+    background-color: #0056b3;
+}
+
+.modal-content {
+    overflow-y: auto;
+    max-height: 70vh;  
+}
+
+@media (max-width: 768px) {
+    .modal {
+        width: 95%;  
+        max-width: 100%;
+    }
+
+    .modal h3 {
+        font-size: 1.6rem; 
+    }
+
+    .modal p {
+        font-size: 1rem;  
+    }
+
+    .modal button {
+        font-size: 0.9rem;  
+        padding: 8px 16px;  
+    }
+}
+
+
+/* 
+--------------------------------------------------------------------------------
+                                ADMIN    
+--------------------------------------------------------------------------------
+*/
+.admin-panel {
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.add-btn {
+    width: 30%;
+}
+.add-btn:hover{
+    background-color: #e9e6e6b8;
+    border: 1px solid black;
+}
+
+.admin-panel h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+.profile-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 0 1rem;
+}
+
+@media (max-width: 768px) {
+    .profile-cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+.profile-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: center;
+    padding: 15px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.profile-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.profile-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.profile-info {
+    padding: 1rem;
+}
+
+.profile-info h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.profile-info p {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.buttons button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+    border: none;
+}
+
+.buttons button:hover {
+    background-color: #0056b3;
+}
+
+
+/* Admin MODAL */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    max-height: 80vh;
+}
+
+.modal img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+.modal h3 {
+    font-size: 1.8rem;
+    margin-top: 15px;
+}
+
+.modal p {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.modal input {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+}
+
+.modal button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.modal button:hover {
+    background-color: #0056b3;
+}
+
+.modal button:focus {
+    outline: none;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .modal {
+        width: 95%;
+    }
+
+    .modal h3 {
+        font-size: 1.6rem;
+    }
+
+    .modal input {
+        font-size: 1rem;
+    }
 }
