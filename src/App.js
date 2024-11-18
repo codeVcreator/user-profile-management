@@ -104,6 +104,7 @@ const App = () => {
                 <Route path="/admin" element={<Admin />} />
                 <Route path="/customer" element={<Customer />} />
                 <Route path="*" element={<Error />} />
+                <Route path="/error" element={<Error />} />
             </Routes>
             <Footer />
         </div>

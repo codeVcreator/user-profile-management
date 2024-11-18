@@ -20,9 +20,17 @@ const AddProfileModal = ({ addProfile, closeModal }) => {
         });
     };
 
+    // LOCAL STORAGE RUN OUT OF CAPACITY IF UPLOADING BIGGER DATA.....!!!!
     const handleFileChange = (e) => {
         const file = e.target.files[0];
         if (file) {
+            // Check file size (5MB in this case)
+            const maxSize = 500 * 1024; // 500kb
+            if (file.size > maxSize) {
+                alert("File is too large. Please select an image under 500Kb.");
+                return; // Do not proceed further
+            }
+    
             const reader = new FileReader();
             reader.onload = () => {
                 setProfileData((prevData) => ({
@@ -33,7 +41,7 @@ const AddProfileModal = ({ addProfile, closeModal }) => {
             reader.readAsDataURL(file);
         }
     };
-
+    
     const handleSubmit = (e) => {
         e.preventDefault();
         setIsSubmitting(true);
